@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello</title>
+    </head>
+    <body>
+        <h1>{{ message }}</h1>
+
+        <p>nous sommes le {{ now | date('d/m/y')}}</p>
+
+        <ul>
+            {% for fruit in fruitList %}
+                {%  if loop.index is not divisible by(2) %}
+                    <li><strong>{{ fruit }}</strong></li>
+                {% else %}
+                    <li>{{ fruit }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </body>
+</html>
+

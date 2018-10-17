@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} Blog {% endblock %}
+
+{% block body %}
+    <div class="container">
+    <div class="row">
+
+        <div class="span12">
+    <h1>Liste des articles</h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Nb commentaires</th>
+        </tr>
+        {% for article in articles %}
+            <tr>
+                <td>{# //path('blogbundle_details', {'id': article.id})#}
+                    <a href="{{  path('details', {'id': article.id})  }}">
+                        {{ article.title }}
+                    </a>
+                </td>
+                <td>{{ article.author.firstName }} {{ article.author.name }}</td>
+                <td>{{ article.comments | length }}</td>
+                <td><a href="{{ path('update',{'id': article.id}) }}">Modifier</a> </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+            <div class="text-center">{{ knp_pagination_render(articles) }}</div>
+
+    </div>
+   </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block aside %}
+    <h3>Les derniers articles</h3>
+{% endblock %}

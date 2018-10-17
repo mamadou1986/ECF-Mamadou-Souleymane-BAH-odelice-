@@ -1,0 +1,47 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Sow
+ * Date: 16/08/2018
+ * Time: 04:04
+ */
+// src/AppBundle/Entity/User.php
+
+namespace AppBundle\Entity;
+
+use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class user extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->adresse = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\commandes",mappedBy="user",cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $commandes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\userAdress",mappedBy="user",cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $adresse;
+
+}
